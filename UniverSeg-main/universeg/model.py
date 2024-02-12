@@ -1,14 +1,15 @@
 from dataclasses import dataclass
 from typing import Any, Dict, List, Literal, Optional, Tuple, Union
-
-import einops as E
+from pydantic import validate_call
+import einops as Els
 import torch
 from torch import nn
 
-from .nn import CrossConv2d
-from .nn import reset_conv2d_parameters
-from .nn import Vmap, vmap
-from .validation import (Kwargs, as_2tuple, size2t, validate_arguments,
+#in all these imports i add universeg.
+from universeg.nn import CrossConv2d
+from universeg.nn import reset_conv2d_parameters
+from universeg.nn import Vmap, vmap
+from universeg.validation import (Kwargs, as_2tuple, size2t, validate_arguments,
                          validate_arguments_init)
 
 
@@ -192,7 +193,7 @@ class UniverSeg(nn.Module):
         return target
 
 
-@validate_arguments
+@validate_call
 def universeg(version: Literal["v1"] = "v1", pretrained: bool = False) -> nn.Module:
     weights = {
         "v1": "https://github.com/JJGO/UniverSeg/releases/download/weights/universeg_v1_nf64_ss64_STA.pt"

@@ -3,7 +3,7 @@ from typing import Optional, Tuple, Union
 import einops as E
 import torch
 import torch.nn as nn
-from pydantic import validate_arguments
+from pydantic import validate_arguments, validate_call
 
 size2t = Union[int, Tuple[int, int]]
 
@@ -70,7 +70,7 @@ class CrossConv2d(nn.Conv2d):
     >>> output.shape  #(2, 3, 5, 7, 32, 32)
     """
 
-    @validate_arguments
+    @validate_call
     def __init__(
         self,
         in_channels: size2t,
