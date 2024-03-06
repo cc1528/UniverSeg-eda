@@ -1,31 +1,45 @@
 import os
-#this code releases images of the input images
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 import numpy as np
 import scipy.io as sio
+import matplotlib.pyplot as plt
+from matplotlib.image import imread, imsave
 
-from matplotlib.image import imsave
-
-# Load the MATLAB file
+# Load the input image
 input_file_path = r"/mnt/c/Users/cinth/Documentos/ams/data_science/actual_thesis/codes/UniverSeg-main/UniverSeg-main/example_data/Training/I1.mat"
 data = sio.loadmat(input_file_path)
-
-# Access the 'I' header
 I_header = data['I']
+tframe_data = I_header['tframe'][0][0]
+dicom_data = tframe_data['dicom'][0][0]
 
-# Check if it's a numpy ndarray
-if isinstance(I_header, np.ndarray):
-    # Access the 'tframe' field
-    tframe_data = I_header['tframe'][0][0]
+# Save the image to a file
+imsave('image.png', dicom_data, cmap='gray')  # Assuming grayscale image, change cmap if needed
 
-    # Access the 'dicom' field within 'tframe'
-    dicom_data = tframe_data['dicom'][0][0]
+# Load the input image
+input_image_path = 'image.png'
+input_image = imread(input_image_path)
 
-    # Save the image to a file
-    imsave('image.png', dicom_data, cmap='gray')  # Assuming grayscale image, change cmap if needed
-    print("Image saved as 'image.png'")
-else:
-    print("The 'I' header is not a numpy ndarray.")
+# Get the dimensions of the input image
+image_height, image_width = input_image.shape[:2]
 
+# Load the coordinates from the output file
+output_file_path = r"/mnt/c/Users/cinth/Documentos/ams/data_science/actual_thesis/codes/UniverSeg-main/UniverSeg-main/example_data/Training/O1.mat"
+output_data = sio.loadmat(output_file_path)
+coordinates = output_data['output']['Inner_with_Papillary_Muscles'][0, 0]
+
+# Scale the coordinates to match the dimensions of the input image
+scaled_coordinates = np.array(coordinates) * np.array([image_width / 339, image_height / 413])
+
+# Plot the input image
+plt.imshow(input_image, cmap='gray')
+
+# Plot the coordinates on top of the input image
+plt.scatter(scaled_coordinates[:, 0], scaled_coordinates[:, 1], c='red', marker='.', label='Coordinates')
+
+# Add labels and legend
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Input Image with Coordinates')
+plt.legend()
+
+# Show the plot
+plt.show()
