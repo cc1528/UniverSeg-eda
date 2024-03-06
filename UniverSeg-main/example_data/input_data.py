@@ -25,17 +25,24 @@ image_height, image_width = input_image.shape[:2]
 output_file_path = r"/mnt/c/Users/cinth/Documentos/ams/data_science/actual_thesis/codes/UniverSeg-main/UniverSeg-main/example_data/Training/O1.mat"
 output_data = sio.loadmat(output_file_path)
 coordinates = output_data['output']['Inner_with_Papillary_Muscles'][0, 0]
+#print(coordinates)
+
+# # Scale the coordinates to match the dimensions of the input image
+#scaled_coordinates = np.array(coordinates) * np.array([image_width / 339, image_height / 413])
+#print(scaled_coordinates)
 
 # Scale the coordinates to match the dimensions of the input image
-scaled_coordinates = np.array(coordinates) * np.array([image_width / 339, image_height / 413])
-
-# Plot the input image
-plt.imshow(input_image, cmap='gray')
-
-# Plot the coordinates on top of the input image
-plt.scatter(scaled_coordinates[:, 0], scaled_coordinates[:, 1], c='red', marker='.', label='Coordinates')
-
-# Add labels and legend
+-
+# x_coordinates = scaled_coordinates[:, 0]
+# y_coordinates = scaled_coordinates[:, 1]
+#
+# # Plot the input image
+# plt.imshow(input_image, cmap='gray')
+#
+# # Plot the coordinates on top of the input image
+# plt.scatter(x_coordinates, y_coordinates, c='red', marker='.', label='Coordinates')
+#
+# # Add labels and legend
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.title('Input Image with Coordinates')
