@@ -4,3 +4,12 @@ pydantic
 numpy
 Pillow
 nibabel
+ipykernel==6.29.3
+torch
+torchvision
+numpy
+pandas
+mat4py
+hdf5storage
+tqdm
+jupyter
