@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Any, Dict, List, Literal, Optional, Tuple, Union
 from pydantic import validate_call
-import einops as Els
+import einops as E
 import torch
 from torch import nn
 
@@ -207,3 +207,5 @@ def universeg(version: Literal["v1"] = "v1", pretrained: bool = False) -> nn.Mod
         model.load_state_dict(state_dict)
 
     return model
+
+
