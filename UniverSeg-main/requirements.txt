@@ -15,4 +15,3 @@ jupyter
 opencv-python
 scipy
 matplotlib
-
