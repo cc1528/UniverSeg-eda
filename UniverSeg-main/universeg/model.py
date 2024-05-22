@@ -155,6 +155,7 @@ class UniverSeg(nn.Module):
             self.enc_blocks.append(block)
             skip_outputs.append(in_ch)
 
+
         # Decoder
         skip_chs = skip_outputs[-2::-1]
         for (cross_ch, conv_ch), skip_ch in zip(decoder_blocks, skip_chs):
@@ -168,8 +169,13 @@ class UniverSeg(nn.Module):
 
     def forward(self, target_image, support_images, support_labels):
 
+        #target = E.rearrange(target_image, "B 1 H W -> B 1 1 H W")
         target = E.rearrange(target_image, "B 1 H W -> B 1 1 H W")
+
         support = torch.cat([support_images, support_labels], dim=2)
+
+        # support_labels = support_labels.unsqueeze(1)  # Add a new dimension
+        # support = torch.cat([support_images, support_labels], dim=1)  # Concatenate tensors
 
         pass_through = []
 
