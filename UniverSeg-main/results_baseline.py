@@ -33,10 +33,10 @@ _ = model.to(device)
 
 # Define input and mask folders for the JNU_FMI dataset
 test_input_folder = r'../../datasets/data/partitioned_dataset/images/test'
-test_mask_folder = r'./MedSAM_Universeg_2024/datasets/data/partitioned_dataset/masks/test'
+test_mask_folder = r'../../datasets/data/partitioned_dataset/masks/test'
 
-support_input_folder = r'./MedSAM_Universeg_2024/datasets/data/partitioned_dataset/images/train'
-support_mask_folder = r'./MedSAM_Universeg_2024/datasets/data/partitioned_dataset/masks/train'
+support_input_folder = r'../../datasets/data/partitioned_dataset/images/train'
+support_mask_folder = r'../../datasets/data/partitioned_dataset/masks/train'
 
 
 def visualize_tensors(tensors, col_wrap=8, col_names=None, title=None, figsize=(15, 15)):
