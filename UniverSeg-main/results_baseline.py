@@ -32,7 +32,7 @@ model = universeg(pretrained=True)
 _ = model.to(device)
 
 # Define input and mask folders for the JNU_FMI dataset
-test_input_folder = r'../../MedSAM_Universeg_2024/datasets/data/partitioned_dataset/images/test'
+test_input_folder = r'../../datasets/data/partitioned_dataset/images/test'
 test_mask_folder = r'./MedSAM_Universeg_2024/datasets/data/partitioned_dataset/masks/test'
 
 support_input_folder = r'./MedSAM_Universeg_2024/datasets/data/partitioned_dataset/images/train'
