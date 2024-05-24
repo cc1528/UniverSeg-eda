@@ -421,7 +421,7 @@ for support_size in support_sizes:
                 # support_images, support_labels = sample_support(j)
 
                 # perform inference
-                vals = inference(model, image, label, support_images[:support_size], support_labels[:support_size])
+                vals = inferencesupport(model, image, label, support_images[:support_size], support_labels[:support_size])
                 dice_score_value = vals['score'] if 'score' in vals else None
                 ensemble_scores.append(dice_score_value)
 
